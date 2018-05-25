@@ -1,5 +1,5 @@
 from tkinter import filedialog, END, DISABLED, NORMAL
-import file_stuff
+import file_operations
 import tvdb
 import threading
 import queue
@@ -8,7 +8,7 @@ import queue
 def update_files(gui):
     if gui.path_var.get() != '':
         try:
-            gui.old_names = file_stuff.get_files(gui.path_var.get(), gui.include_folders_var.get())
+            gui.old_names = file_operations.get_files(gui.path_var.get(), gui.include_folders_var.get())
             sort_files(gui)
             populate_treeview(gui)
         except Exception as ex:
@@ -169,6 +169,6 @@ def rename_files(gui):
         new_name = treeview.item(child)['values'][1]
         name_dict.update({old_name: new_name})
     path = gui.path_var.get()
-    file_stuff.rename_files(path, name_dict)
+    file_operations.rename_files(path, name_dict)
     update_files(gui)
 
